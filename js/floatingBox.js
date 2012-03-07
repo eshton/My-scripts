@@ -4,7 +4,7 @@
  * 
  * An example of usage can be found here: http://eshton.github.com/floatingBox.html
  * 
- * /
+ */
 (function(){
 	/* Configuration */
 	var boxStyle = {
