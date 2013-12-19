@@ -5,10 +5,11 @@
  * An example of usage can be found here: http://eshton.github.com/floatingBox.html
  * 
  */
-(function(){
+var FloatingBox = (function(){
 	/* Configuration */
 	var boxStyle = {
 		'background': '#fff',
+		'color': 'black',
 		'border' : '1px solid green',
 		'padding' : '5px'
 	};
@@ -26,21 +27,27 @@
 	box.css(boxStyle);
 	box.addClass(boxClass);
 	
-	$('.' + elementClass).mouseenter(function(){
-		var element = $(this);
-		element.append(box);
-		box.text(element.attr(messageAttribute));
-
-		var boxReference = box;
-		$(document).mousemove(function(e){
-			boxReference.css({
-				'top':e.pageY-35+'px',
-				'left':e.pageX+15+'px'
+	var apply = function(){
+		$('.' + elementClass).mouseenter(function(){
+			var element = $(this);
+			element.append(box);
+			box.text(element.attr(messageAttribute));
+	
+			var boxReference = box;
+			$(document).mousemove(function(e){
+				boxReference.css({
+					'top':e.pageY-35+'px',
+					'left':e.pageX+15+'px'
+				});
 			});
+			
+		}).mouseleave(function(){
+			$(document).unbind('mousemove')
+			box.remove();
 		});
-		
-	}).mouseleave(function(){
-		$(document).unbind('mousemove')
-		box.remove();
-	});				
+	};
+	
+	return {
+		apply: apply
+	}
 })();
